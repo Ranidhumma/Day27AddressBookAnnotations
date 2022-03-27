@@ -12,8 +12,7 @@ public class ContactPerson {
 
 	/* Constructor */
 
-	public ContactPerson(String firstName, String lastName, String address, String city, String state, int zip,
-			long phoneNumber, String email) {
+	public ContactPerson() {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;

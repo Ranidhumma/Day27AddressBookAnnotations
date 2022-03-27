@@ -1,16 +1,19 @@
 package com.java;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 public class MultipleAddressBook {
+
+	Scanner scanner = new Scanner(System.in);
 	/* use of hashMap to save the addressBook */
 	Map<String, AddressBookNew> addressBookMap = new HashMap<>();
 
 	public void addAddressBook() { // to add address book
 		System.out.println("Enter Name of new Address Book: ");
-		Scanner scanner = new Scanner(System.in);
+
 		String bookName = scanner.next();
 		/* we use containsKey to check if the book name exists */
 
@@ -94,4 +97,28 @@ public class MultipleAddressBook {
 			System.out.println(" ");
 		}
 	}
+
+	public void searchByState() {
+		// TODO Auto-generated method stub
+		System.out.println("Enter the name of the State to the get persons : ");
+		String stateName = scanner.next();
+		for (String i : addressBookMap.keySet()) {
+			List<ContactPerson> arr = addressBookMap.get(i).contacts;
+			arr.stream().filter(person -> person.getState().equals(stateName))
+					.forEach(person -> System.out.println(person.getFirstName()));
+		}
+	}
+
+	public void searchByCity() {
+		// TODO Auto-generated method stub
+
+		System.out.println("Enter the name of the City to get the persons : ");
+		String cityName = scanner.next();
+		for (String i : addressBookMap.keySet()) {
+			List<ContactPerson> arr = addressBookMap.get(i).contacts;
+			arr.stream().filter(person -> person.getCity().equals(cityName))
+					.forEach(person -> System.out.println(person.getFirstName()));
+		}
+	}
+
 }

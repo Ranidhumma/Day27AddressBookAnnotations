@@ -1,14 +1,17 @@
 package com.java;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class AddressBookNew {
 	Scanner scanner = new Scanner(System.in);
 	List<ContactPerson> contacts = new ArrayList<>();
-
-	String name;
+	Map<String, AddressBookNew> addressBookMap = new HashMap<>();
+	ContactPerson person = new ContactPerson();
+	String name;;
 
 	public void duplicateCheck() {
 		System.out.print(" Please enter the first name: ");
@@ -32,6 +35,7 @@ public class AddressBookNew {
 	}
 
 	public void addPerson() {
+		ContactPerson person = new ContactPerson();
 		Scanner scan = new Scanner(System.in);
 		System.out.print(" Please enter the first name: ");
 		String firstName = scan.next();
@@ -50,9 +54,16 @@ public class AddressBookNew {
 		System.out.print(" Please enter the email: ");
 		String email = scan.next();
 
-		ContactPerson newContact = new ContactPerson(firstName, lastName, address, city, state, zip, phoneNumber,
-				email);
-		contacts.add(newContact);
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setAddress(address);
+		person.setCity(city);
+		person.setState(state);
+		person.setZip(zip);
+		person.setPhoneNumber(phoneNumber);
+		person.setEmail(email);
+		contacts.add(person);
+
 	}
 
 	public ContactPerson findContact() { // to find the contacts
