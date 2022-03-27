@@ -8,12 +8,26 @@ public class AddressBookNew {
 	Scanner scanner = new Scanner(System.in);
 	List<ContactPerson> contacts = new ArrayList<>();
 
+	String name;
+
+	public void duplicateCheck() {
+		System.out.print(" Please enter the first name: ");
+		name = scanner.next();
+		for (ContactPerson i : contacts) {
+			if (i.getFirstName().equals(name)) {
+				System.out.println(" Given name already exists");
+			}
+			return;
+		}
+		addPerson();
+	}
+
 	public void addContact() { // taking input from console to add user
 		System.out.println("Enter the number of contacts you want to enter");
 		int number = scanner.nextInt();
 		for (int i = 0; i < number; i++) {
 			System.out.println("Enter the contact details of person ");
-			addPerson();
+			duplicateCheck();
 		}
 	}
 
