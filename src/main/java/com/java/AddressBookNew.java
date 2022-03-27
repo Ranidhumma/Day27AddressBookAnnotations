@@ -8,7 +8,16 @@ public class AddressBookNew {
 	Scanner scanner = new Scanner(System.in);
 	List<ContactPerson> contacts = new ArrayList<>();
 
-	public void addContact() {
+	public void addContact() { // taking input from console to add user
+		System.out.println("Enter the number of contacts you want to enter");
+		int number = scanner.nextInt();
+		for (int i = 0; i < number; i++) {
+			System.out.println("Enter the contact details of person ");
+			addPerson();
+		}
+	}
+
+	public void addPerson() {
 		Scanner scan = new Scanner(System.in);
 		System.out.print(" Please enter the first name: ");
 		String firstName = scan.next();
