@@ -68,7 +68,7 @@ public class ContactPerson {
 		this.state = state;
 	}
 
-	public long getZip() {
+	public int getZip() {
 		return zip;
 	}
 
