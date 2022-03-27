@@ -17,7 +17,7 @@ public class AddressBookNew {
 		System.out.print(" Please enter the address: ");
 		String address = scan.next();
 
-		System.out.print(" Please enter the city: ");
+		System.out.print(" Please enter the city : ");
 		String city = scan.next();
 
 		System.out.print(" Please enter the state: ");
