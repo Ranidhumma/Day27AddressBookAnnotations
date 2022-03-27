@@ -147,6 +147,6 @@ public class AddressBookNew {
 			return;
 		}
 		contacts.remove(contact); // remove method to delete the contact
-		System.out.println("The contact has been deleted from the Address Book");
+		System.out.println("contact deleted from the Address Book");
 	}
 }
