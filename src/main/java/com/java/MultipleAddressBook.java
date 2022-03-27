@@ -11,6 +11,7 @@ public class MultipleAddressBook {
 	Scanner scanner = new Scanner(System.in);
 	/* use of hashMap to save the addressBook */
 	Map<String, AddressBookNew> addressBookMap = new HashMap<>();
+	List<ContactPerson> contacts = new ArrayList<ContactPerson>();
 
 	public void addAddressBook() { // to add address book
 		System.out.println("Enter Name of new Address Book: ");
@@ -129,5 +130,21 @@ public class MultipleAddressBook {
 				System.out.println(contact);
 			}
 		}
+	}
+
+	/**
+	 * In this method we are displaying the number of person in the city or state.
+	 * 
+	 * @param listToDisplay - we are passing the list of city or state
+	 */
+	public void countPeopleByRegion(HashMap<String, ArrayList<ContactPerson>> listToDisplay) {
+		System.out.println("Enter the name of the region :");
+		String regionName = scanner.next();
+		long countPeople = listToDisplay.values().stream()
+				.map(region -> region.stream()
+						.filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+				.count();
+		System.out.println("Number of People residing in " + regionName + " are: " + countPeople + "\n");
+
 	}
 }
