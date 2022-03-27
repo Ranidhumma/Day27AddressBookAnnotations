@@ -1,5 +1,6 @@
 package com.java;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,8 @@ public class MultipleAddressBook {
 
 	public void addAddressBook() { // to add address book
 		System.out.println("Enter Name of new Address Book: ");
-
 		String bookName = scanner.next();
 		/* we use containsKey to check if the book name exists */
-
 		if (addressBookMap.containsKey(bookName)) {
 			System.out.println("Address book with this name exists, Enter new name.");
 			addAddressBook();
@@ -121,4 +120,14 @@ public class MultipleAddressBook {
 		}
 	}
 
+	public void displayPeopleByRegion(HashMap<String, ArrayList<ContactPerson>> addressBookMap) {
+		List<ContactPerson> contacts;
+		for (String name : addressBookMap.keySet()) {
+			System.out.println("People residing in: " + name);
+			contacts = addressBookMap.get(name);
+			for (ContactPerson contact : contacts) {
+				System.out.println(contact);
+			}
+		}
+	}
 }

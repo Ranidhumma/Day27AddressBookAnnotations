@@ -10,6 +10,9 @@ public class AddressBookNew {
 	Scanner scanner = new Scanner(System.in);
 	List<ContactPerson> contacts = new ArrayList<>();
 	Map<String, AddressBookNew> addressBookMap = new HashMap<>();
+
+	public static HashMap<String, ArrayList<ContactPerson>> personByCity = new HashMap<String, ArrayList<ContactPerson>>();
+	public static HashMap<String, ArrayList<ContactPerson>> personByState = new HashMap<String, ArrayList<ContactPerson>>();
 	ContactPerson person = new ContactPerson();
 	String name;;
 
@@ -37,6 +40,7 @@ public class AddressBookNew {
 	public void addPerson() {
 		ContactPerson person = new ContactPerson();
 		Scanner scan = new Scanner(System.in);
+
 		System.out.print(" Please enter the first name: ");
 		String firstName = scan.next();
 		System.out.print(" Please enter the last name: ");
@@ -183,4 +187,30 @@ public class AddressBookNew {
 		contacts.remove(contact); // remove method to delete the contact
 		System.out.println("contact deleted from the Address Book");
 	}
+
+	public void addPersonToCity(ContactPerson contact) {
+		if (personByCity.containsKey(contact.getCity())) {
+			personByCity.get(contact.getCity()).add(contact);
+		} else {
+			ArrayList<ContactPerson> cityList = new ArrayList<ContactPerson>();
+			cityList.add(contact);
+			personByCity.put(contact.getCity(), cityList);
+		}
+	}
+
+	/**
+	 * In this method we are checking the person by state
+	 * 
+	 * @param contact- We are parsing the contact there
+	 */
+	public void addPersonToState(ContactPerson contact) {
+		if (personByState.containsKey(contact.getState())) {
+			personByState.get(contact.getState()).add(contact);
+		} else {
+			ArrayList<ContactPerson> stateList = new ArrayList<ContactPerson>();
+			stateList.add(contact);
+			personByState.put(contact.getState(), stateList);
+		}
+	}
+
 }
