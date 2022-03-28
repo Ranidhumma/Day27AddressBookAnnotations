@@ -73,76 +73,81 @@ public class AddressBookNew {
 	public void editContact() {
 		ContactPerson contact = new ContactPerson();
 
-		System.out.println("Enter your choice to edit: " + "\n 1.Edit first name" + "\n 2.Edit last name"
-				+ "\n 3.Edit address" + "\n 4.Edit city" + "\n 5.Edit state" + "\n 6.Edit zipcode"
-				+ "\n 7.Edit phone number" + "\n 8.Edit email");
+		System.out.println("Enter the first name:");
+		String firstName = scanner.next();
+		if (contacts.containsKey(firstName)) {
+			contact = contacts.get(firstName);
 
-		int choice = scanner.nextInt(); // with the help of setters setting the new details
-		switch (choice) {
-		case 1:
-			System.out.println("Enter new first name");
-			String newFirstName = scanner.next();
-			contact.setFirstName(newFirstName);
-			System.out.println("new first name updated");
+			System.out.println("Enter your choice to edit: " + "\n 1.Edit first name" + "\n 2.Edit last name"
+					+ "\n 3.Edit address" + "\n 4.Edit city" + "\n 5.Edit state" + "\n 6.Edit zipcode"
+					+ "\n 7.Edit phone number" + "\n 8.Edit email");
 
-			break;
-		case 2:
-			System.out.println("Enter new last name");
-			String newLastName = scanner.next();
-			contact.setLastName(newLastName);
-			System.out.println("new last name updated");
+			int choice = scanner.nextInt(); // with the help of setters setting the new details
+			switch (choice) {
+			case 1:
+				System.out.println("Enter new first name");
+				String newFirstName = scanner.next();
+				contact.setFirstName(newFirstName);
+				System.out.println("new first name updated");
 
-			break;
-		case 3:
-			System.out.println("Enter new address");
-			String newAddress = scanner.next();
-			contact.setAddress(newAddress);
-			System.out.println("new newaddress updated");
+				break;
+			case 2:
+				System.out.println("Enter new last name");
+				String newLastName = scanner.next();
+				contact.setLastName(newLastName);
+				System.out.println("new last name updated");
 
-			break;
-		case 4:
-			System.out.println("Enter new city");
-			String newCity = scanner.next();
-			contact.setCity(newCity);
-			System.out.println("new city updated");
+				break;
+			case 3:
+				System.out.println("Enter new address");
+				String newAddress = scanner.next();
+				contact.setAddress(newAddress);
+				System.out.println("new newaddress updated");
 
-			break;
-		case 5:
-			System.out.println("Enter new state");
-			String newState = scanner.next();
-			contact.setState(newState);
-			System.out.println("new state updated");
+				break;
+			case 4:
+				System.out.println("Enter new city");
+				String newCity = scanner.next();
+				contact.setCity(newCity);
+				System.out.println("new city updated");
 
-			break;
-		case 6:
-			System.out.println("Enter new zip code");
-			int newZipCode = scanner.nextInt();
-			contact.setZip(newZipCode);
-			System.out.println("new zip code updated");
-			break;
+				break;
+			case 5:
+				System.out.println("Enter new state");
+				String newState = scanner.next();
+				contact.setState(newState);
+				System.out.println("new state updated");
 
-		case 7:
-			System.out.println("Enter new phone number");
-			long newPhoneNumber = scanner.nextLong();
-			contact.setPhoneNumber(newPhoneNumber);
-			System.out.println("new phone number updated");
+				break;
+			case 6:
+				System.out.println("Enter new zip code");
+				int newZipCode = scanner.nextInt();
+				contact.setZip(newZipCode);
+				System.out.println("new zip code updated");
+				break;
 
-			break;
+			case 7:
+				System.out.println("Enter new phone number");
+				long newPhoneNumber = scanner.nextLong();
+				contact.setPhoneNumber(newPhoneNumber);
+				System.out.println("new phone number updated");
 
-		case 8:
-			System.out.println("Enter new email");
-			String newEmail = scanner.next();
-			contact.setEmail(newEmail);
-			System.out.println("new email updated");
+				break;
 
-			break;
+			case 8:
+				System.out.println("Enter new email");
+				String newEmail = scanner.next();
+				contact.setEmail(newEmail);
+				System.out.println("new email updated");
 
-		default:
-			System.out.println("Please enter a number between 1-8");
-			break;
+				break;
+
+			default:
+				System.out.println("Please enter a number between 1-8");
+				break;
+			}
+			System.out.println("The contact after editing is : " + contact);
 		}
-		System.out.println("The contact after editing is : " + contact);
-
 	}
 
 	public void displayContact() {
