@@ -2,20 +2,24 @@ package com.java;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MultipleAddressBook {
 
 	Scanner scanner = new Scanner(System.in);
 	/* use of hashMap to save the addressBook */
 	Map<String, AddressBookNew> addressBookMap = new HashMap<>();
-	List<ContactPerson> contacts = new ArrayList<ContactPerson>();
+	public Map<String, ContactPerson> contacts = new HashMap<String, ContactPerson>();
+	ContactPerson person = new ContactPerson();
 
-	public void addAddressBook() { // to add address book
+	public void addAddressBook() {
 		System.out.println("Enter Name of new Address Book: ");
 		String bookName = scanner.next();
+
 		/* we use containsKey to check if the book name exists */
 		if (addressBookMap.containsKey(bookName)) {
 			System.out.println("Address book with this name exists, Enter new name.");
@@ -31,7 +35,6 @@ public class MultipleAddressBook {
 
 	public void addContact() { // to add contact in Address book
 		System.out.println("Enter the name of Address book to add the contact.");
-		Scanner scanner = new Scanner(System.in);
 		String newContact = scanner.nextLine();
 		AddressBookNew addressBook = addressBookMap.get(newContact); // to check if the addressbook is present
 		if (addressBook == null) {
@@ -44,7 +47,6 @@ public class MultipleAddressBook {
 
 	public void editContactInBook() {
 		System.out.println("Enter Name of Address Book you want to edit: ");
-		Scanner scanner = new Scanner(System.in);
 		String editBookName = scanner.next();
 		if (addressBookMap.containsKey(editBookName)) {
 			/* calling the edit contact method to edit contact */
@@ -57,7 +59,6 @@ public class MultipleAddressBook {
 
 	public void deleteAddressBook() {
 		System.out.println("Enter Name of Address Book you want to delete: ");
-		Scanner scanner = new Scanner(System.in);
 		String bookName = scanner.next();
 		/* we use containsKey to check if addressBook present */
 		if (addressBookMap.containsKey(bookName)) {
@@ -71,7 +72,6 @@ public class MultipleAddressBook {
 
 	public void deleteContactInBook() {
 		System.out.println("Enter Name of Address Book you want to delete the contacts in it: ");
-		Scanner scanner = new Scanner(System.in);
 		String bookName = scanner.next();
 		if (addressBookMap.containsKey(bookName)) {
 			/* we call the deleteContact function to delete the contact */
@@ -100,11 +100,11 @@ public class MultipleAddressBook {
 
 	public void searchByState() {
 		// TODO Auto-generated method stub
-		System.out.println("Enter the name of the State to the get persons : ");
-		String stateName = scanner.next();
+		System.out.println("Enter the name of the City to get the persons : ");
+		String cityName = scanner.next();
 		for (String i : addressBookMap.keySet()) {
-			List<ContactPerson> arr = addressBookMap.get(i).contacts;
-			arr.stream().filter(person -> person.getState().equals(stateName))
+			List<ContactPerson> arr = (List<ContactPerson>) addressBookMap.get(i).contacts;
+			arr.stream().filter(person -> person.getCity().equals(cityName))
 					.forEach(person -> System.out.println(person.getFirstName()));
 		}
 	}
@@ -115,21 +115,20 @@ public class MultipleAddressBook {
 		System.out.println("Enter the name of the City to get the persons : ");
 		String cityName = scanner.next();
 		for (String i : addressBookMap.keySet()) {
-			List<ContactPerson> arr = addressBookMap.get(i).contacts;
+			List<ContactPerson> arr = (List<ContactPerson>) addressBookMap.get(i).contacts;
 			arr.stream().filter(person -> person.getCity().equals(cityName))
 					.forEach(person -> System.out.println(person.getFirstName()));
 		}
 	}
 
 	public void displayPeopleByRegion(HashMap<String, ArrayList<ContactPerson>> addressBookMap) {
-		List<ContactPerson> contacts;
-		for (String name : addressBookMap.keySet()) {
-			System.out.println("People residing in: " + name);
-			contacts = addressBookMap.get(name);
-			for (ContactPerson contact : contacts) {
-				System.out.println(contact);
-			}
-		}
+		System.out.println("Enter the name of the region :");
+		String regionName = scanner.next();
+
+		addressBookMap.values().stream()
+				.map(region -> region.stream()
+						.filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+				.forEach(person -> person.forEach(personDetails -> System.out.println(personDetails)));
 	}
 
 	/**
@@ -144,7 +143,32 @@ public class MultipleAddressBook {
 				.map(region -> region.stream()
 						.filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
 				.count();
+
 		System.out.println("Number of People residing in " + regionName + " are: " + countPeople + "\n");
 
+	}
+
+	public void sortAddressBook() {
+		// TODO Auto-generated method stub
+		/**
+		 * Method to sort the address book by name In this method we are sorting the
+		 * address book by the person first name we have used the sorted method and
+		 * compared 2 contacts and arranged them. In this way it will compare and
+		 * arrange it.
+		 */
+		for (String i : addressBookMap.keySet()) {
+			Map<String, ContactPerson> con = addressBookMap.get(i).contacts;
+
+			List<ContactPerson> sorted = con.values().stream().sorted(
+					(firstperson, secondperson) -> firstperson.getFirstName().compareTo(secondperson.getFirstName()))
+					.collect(Collectors.toList());
+
+			System.out.println("------ Sorted Address Book ------");
+			Iterator iterator = sorted.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
+				System.out.println();
+			}
+		}
 	}
 }
